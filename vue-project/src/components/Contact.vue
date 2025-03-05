@@ -102,7 +102,7 @@ import { ref, onMounted } from 'vue';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://xcdboqdwkycagrzzrfrk.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY || 'your-supabase-key-here'; // Ensure fallback for debugging
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const guestName = ref('');
@@ -113,7 +113,7 @@ const fetchSuggestions = async () => {
   try {
     const { data, error } = await supabase.from('suggestions').select('*');
     if (error) throw error;
-    Suggestions.value = data;
+    Suggestions.value = data || [];
   } catch (error) {
     console.error('Error fetching suggestions:', error.message);
   }
@@ -124,16 +124,17 @@ const addSuggest = async () => {
     alert('Please fill out both fields.');
     return;
   }
-  
+
   try {
-    const { data, error } = await supabase.from('suggestions').insert([
+    const { error } = await supabase.from('suggestions').insert([
       { name: guestName.value, message: guestSuggest.value }
     ]);
+
     if (error) throw error;
-    
-    // Append new suggestion to list
-    Suggestions.value.push({ id: data[0].id, name: guestName.value, message: guestSuggest.value });
-    
+
+    // Fetch latest suggestions after insert
+    fetchSuggestions();
+
     // Reset form
     guestName.value = '';
     guestSuggest.value = '';
@@ -142,11 +143,14 @@ const addSuggest = async () => {
   }
 };
 
-onMounted(() => {
-  fetchSuggestions();
+onMounted(fetchSuggestions);
+
+defineExpose({
+  guestName,
+  guestSuggest,
+  addSuggest
 });
 
-export { guestName, guestSuggest, Suggestions, addSuggest };
 
 </script>
 

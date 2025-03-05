@@ -8,7 +8,7 @@
       <router-link to="/contact">Contact</router-link>
     </nav>
   </header>
-
+<section class="home">
   <div class="text-image-container">
     <div class="text-container">
       <h1>Hi! I'm Nerimiah Jay Ato</h1> 
@@ -24,6 +24,8 @@
     </div>
     <img :src="profileImage" alt="Profile Image" class="custom-image" />
   </div>
+
+  </section>
 
   <footer>
     <div class="social-buttons-container">

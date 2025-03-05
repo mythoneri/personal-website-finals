@@ -163,13 +163,15 @@ import mariadb from '@/assets/icons/mariadb.png';
 </script>
 
 <style scoped>
+/* Default Styles */
 .skills-icon {
-  width: 30px; /* Adjust the size as needed */
-  height: 30px; /* Ensure the height matches the width */
-  margin-right: 10px; /* Space between icon and text */
-  vertical-align: middle; /* Align icon with text */
+  width: 30px; /* Default size */
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
+/* Card text */
 .card p {
   display: flex;
   align-items: center;
@@ -178,10 +180,37 @@ import mariadb from '@/assets/icons/mariadb.png';
   margin: 5px 0;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .skills-icon {
+    width: 25px; /* Slightly smaller */
+    height: 25px;
+    margin-right: 8px;
+  }
+
+  .card p {
+    font-size: 14px; /* Reduce font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-icon {
+    width: 20px; /* Smaller for very small screens */
+    height: 20px;
+    margin-right: 5px;
+  }
+
+  .card p {
+    font-size: 12px; /* Reduce text size for better fit */
+    flex-direction: column; /* Stack icon and text */
+    text-align: center;
+  }
+}
+
+
 /* Timeline */
 .timelinee-wrapper {
   display: grid;
-  grid-template-rows: 4fr;
   gap: 20px;
   padding: 20px;
   max-width: 800px;
@@ -196,8 +225,8 @@ import mariadb from '@/assets/icons/mariadb.png';
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.3s, box-shadow 0.3s;
-  margin-left: auto; /* Align to the right */
-  width: 80%; /* Adjust width as needed */
+  width: 80%;
+  margin: auto; /* Center the box */
 }
 
 .timelinee-box:hover {
@@ -214,7 +243,6 @@ a:hover {
   text-decoration: underline;
 }
 
-
 .circle {
   width: 20px;
   height: 20px;
@@ -225,7 +253,7 @@ a:hover {
   left: -10px;
 }
 
-
+/* Adjust text sizes */
 .timelinee-box h3 {
   font-size: 24px;
   margin-bottom: 5px;
@@ -237,14 +265,44 @@ a:hover {
   color: #010100;
 }
 
-/* Responsive for smaller screens */
-@media (max-width: 600px) {
+/* Responsive Design */
+@media (max-width: 768px) {
   .timelinee-wrapper {
-      grid-template-columns: 1fr; /* Switch to single column */
+    grid-template-rows: auto;
+    padding: 15px;
   }
 
   .timelinee-box {
-      width: 100%; /* Full width on smaller screens */
-      margin-left: 0; /* Center align on smaller screens */
+    width: 95%; /* Make it wider on smaller screens */
+    text-align: center;
+    padding: 15px;
   }
-}</style>
+
+  .circle {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .timelinee-box {
+    width: 100%; /* Full width for extra small screens */
+    padding: 12px;
+  }
+
+  .timelinee-box h3 {
+    font-size: 18px;
+  }
+
+  .timelinee-box p {
+    font-size: 12px;
+  }
+
+  .circle {
+    width: 15px;
+    height: 15px;
+    top: 18px;
+  }
+}
+
+</style>

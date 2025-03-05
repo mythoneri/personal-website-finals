@@ -24,11 +24,13 @@
 .sticky-header {
   position: sticky;
   top: 0;
-  background-color: #EDE6D4; /* Added background */
+  background-color: #EDE6D4;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.45);
   z-index: 1000;
+  width: 100%;
 }
 
+/* Navigation Links */
 .nav-link {
   display: flex;
   justify-content: flex-end;
@@ -38,6 +40,7 @@
   margin-right: 100px;
 }
 
+/* Navigation Links Styling */
 .nav-link a {
   font-size: 20px;
   color: #010100;
@@ -51,6 +54,23 @@
   color: #183425;
   text-decoration-thickness: 3px;
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .nav-link {
+    flex-direction: column; /* Stack links vertically */
+    gap: 5px;
+    align-items: center;
+    padding: 10px;
+    margin-right: 0;
+  }
+
+  .nav-link a {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
 
 /* Home Section */
 .text-image-container {
@@ -100,15 +120,70 @@
   margin: 10px 50px 50px 100px;
 }
 
-
 /* Section Styling */
 .about, .gallery, .contact, .skills {
   padding: 50px;
   text-align: justify;
   margin: 20px 50px 20px 100px;
   text-indent: 5px;
-  
 }
+
+/* Responsive Design */
+
+
+@media (max-width: 768px) {
+  .text-image-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    text-align: center;
+    margin-left: 0; /* Remove large margin */
+  }
+
+  .text-container {
+    max-width: 90%;
+  }
+
+  .text-container h1 {
+    font-size: 40px;
+  }
+
+  .text-container h4 {
+    font-size: 22px;
+  }
+
+  .custom-image {
+    width: 300px;
+    margin: 20px 0; /* Center image */
+  }
+
+  .about, .gallery, .contact, .skills {
+    margin: 20px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-container h1 {
+    font-size: 32px;
+  }
+
+  .text-container h4 {
+    font-size: 18px;
+  }
+
+  .text-container p {
+    font-size: 14px;
+  }
+
+  .custom-image {
+    width: 250px;
+  }
+
+  .about, .gallery, .contact, .skills {
+    padding: 20px;
+  }
+}
+
 
 /* Footer Style*/
 footer {
@@ -142,7 +217,6 @@ footer {
 }
 
 /*About Style*/
-/* General Styles */
 .container {
   display: flex;
   flex-wrap: wrap;
