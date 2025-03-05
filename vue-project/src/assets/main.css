@@ -134,6 +134,7 @@ footer {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .social-buttons-container img:hover {
@@ -270,90 +271,7 @@ footer {
 }
 
 /* Skills Icon */
-.skills-icon {
-  width: 30px; /* Adjust the size as needed */
-  height: 30px; /* Ensure the height matches the width */
-  margin-right: 10px; /* Space between icon and text */
-  vertical-align: middle; /* Align icon with text */
-}
 
-.card p {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: #010100;
-  margin: 5px 0;
-}
-
-/* Timeline */
-.timelinee-wrapper {
-  display: grid;
-  grid-template-rows: 4fr;
-  gap: 20px;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  position: relative;
-}
-
-.timelinee-box {
-  background: linear-gradient(to bottom, #EDE6D4, #869b8f);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin-left: auto; /* Align to the right */
-  width: 80%; /* Adjust width as needed */
-}
-
-.timelinee-box:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.timelinee-box a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.timelinee-box a:hover h3 {
-  text-decoration: underline;
-}
-
-.circle {
-  width: 20px;
-  height: 20px;
-  background: #22a961;
-  border-radius: 50%;
-  position: absolute;
-  top: 23px;
-  left: -10px;
-}
-
-
-.timelinee-box h3 {
-  font-size: 24px;
-  margin-bottom: 5px;
-  color: #183425;
-}
-
-.timelinee-box p {
-  font-size: 14px;
-  color: #010100;
-}
-
-/* Responsive for smaller screens */
-@media (max-width: 600px) {
-  .timelinee-wrapper {
-      grid-template-columns: 1fr; /* Switch to single column */
-  }
-
-  .timelinee-box {
-      width: 100%; /* Full width on smaller screens */
-      margin-left: 0; /* Center align on smaller screens */
-  }
-}
 
 /*Gallery Styles*/
 .galleryy {
@@ -407,13 +325,9 @@ footer {
 }
 
 
-/* Modal */
 
 
-/* Contact Styles*/
-
-/* Container Styling */
 
 
-/* Header Styling */
+
 

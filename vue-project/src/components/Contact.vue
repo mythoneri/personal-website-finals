@@ -212,7 +212,6 @@ const addSuggest = () => {
   transition: background 0.3s ease-in-out;
 }
 
-/* Fix submit button width */
 #suggestions button {
   width: 100%;
   max-width: 200px; /* Prevent button from stretching */
