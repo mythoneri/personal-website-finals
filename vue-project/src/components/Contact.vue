@@ -40,34 +40,30 @@
       </div>
     </div>
 
-    <div id="suggestions" class="container guestbook-container">
-      <div class="header">
-        <div class="title-container">
-          <h2>Suggestions</h2> <br>
+    <div class="comment-section">
+    <h2>Leave a Comment</h2>
+    <form @submit.prevent="submitComment">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="name" required class="form-control" />
       </div>
-      <form @submit.prevent="addSuggest">
-        <div>
-          <p>
-            <strong>Name:</strong> <br>
-            <input type="text" v-model="guestName" placeholder="Enter your name" required />
-          </p>
-          <p>
-            <strong>Suggestions:</strong> <br>
-            <textarea v-model="guestSuggest" placeholder="Write your suggestions here" rows="4" required></textarea>
-          </p>
-          <div class="clearfix">
-            <button type="submit">Submit</button>
-          </div>
-        </div>
-      </form>
-      <div class="comment-section">
-        <div v-for="suggest in Suggestions" :key="suggest.id" class="suggest">
-          <p><strong>{{ suggest.name }}</strong></p>
-          <p>{{ suggest.message }}</p>
-        </div>
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea id="comment" v-model="comment" required class="form-control"></textarea>
       </div>
-    </div>
-    </div> <!-- Properly closed div -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <div v-if="submissionStatus" class="mt-2">
+        {{ submissionStatus }}
+      </div>
+    </form>
+
+    <h2>Comments</h2>
+    <ul>
+      <li v-for="comment in comments" :key="comment.id">
+        <strong>{{ comment.name }}</strong>: {{ comment.message }}
+      </li>
+    </ul>
+  </div>
   </section> <!-- Properly closed section -->
 
   <footer>
@@ -99,63 +95,60 @@ import linkedin from '@/assets/images/linkedin.jpg';
 import spotify from '@/assets/images/spotify.jpg';
 
 import { ref, onMounted } from 'vue';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabaseClient'
 
-const supabaseUrl = 'https://xcdboqdwkycagrzzrfrk.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY || 'your-supabase-key-here'; // Ensure fallback for debugging
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Initialize Supabase
 
-const guestName = ref('');
-const guestSuggest = ref('');
-const Suggestions = ref([]);
+const comments = ref([]);
+const name = ref('');
+const comment = ref('');
+const submissionStatus = ref(null);
+const tableName = 'comments';
 
-const fetchSuggestions = async () => {
+// Fetch comments from Supabase
+const getComments = async () => {
   try {
-    const { data, error } = await supabase.from('suggestions').select('*');
+    const { data, error } = await supabase.from(tableName).select().order('created_at', { ascending: false });
     if (error) throw error;
-    Suggestions.value = data || [];
-  } catch (error) {
-    console.error('Error fetching suggestions:', error.message);
+    comments.value = data || [];
+  } catch (err) {
+    console.error('Error fetching comments:', err);
   }
 };
 
-const addSuggest = async () => {
-  if (!guestName.value || !guestSuggest.value) {
-    alert('Please fill out both fields.');
+// Submit new comment
+const submitComment = async () => {
+  submissionStatus.value = 'Submitting...';
+
+  if (!name.value.trim() || !comment.value.trim()) {
+    submissionStatus.value = 'Please fill out both fields.';
     return;
   }
 
   try {
-    const { error } = await supabase.from('suggestions').insert([
-      { name: guestName.value, message: guestSuggest.value }
-    ]);
-
-    if (error) throw error;
-
-    // Fetch latest suggestions after insert
-    fetchSuggestions();
-
-    // Reset form
-    guestName.value = '';
-    guestSuggest.value = '';
-  } catch (error) {
-    console.error('Error adding suggestion:', error.message);
+    const { error } = await supabase.from(tableName).insert([{ name: name.value, message: comment.value }]);
+    if (error) {
+      console.error('Error inserting comment:', error);
+      submissionStatus.value = 'Error submitting comment. Please try again.';
+    } else {
+      submissionStatus.value = 'Comment submitted successfully!';
+      name.value = '';
+      comment.value = '';
+      getComments(); // Refresh comments list
+    }
+  } catch (err) {
+    console.error('An unexpected error occurred:', err);
+    submissionStatus.value = 'An unexpected error occurred. Please try again later.';
   }
 };
 
-onMounted(fetchSuggestions);
-
-defineExpose({
-  guestName,
-  guestSuggest,
-  addSuggest
-});
-
+// Fetch comments on mount
+onMounted(getComments);
 
 </script>
 
 
-<style>
+<style scoped>
 .contact-cards-container {
     max-width: 100%;
     margin: auto;
@@ -215,110 +208,93 @@ defineExpose({
 }
 
 /* Suggestions Section */
-#suggestions {
-  background: linear-gradient(to bottom, #fdf7e3, #b8c4b1);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  max-width: 1200px; /* Set a fixed max-width */
-  width: 100%; /* Ensure it is responsive */
-  margin: 30px auto;
-}
-
-/* Fixing form elements */
-#suggestions form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 1180px;
-}
-
-#suggestions input,
-#suggestions textarea {
-  width: 100%; /* Make sure input fields do not exceed the form width */
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.5);
-  font-size: 16px;
-  color: #2d3b2d;
-  outline: none;
-  transition: background 0.3s ease-in-out;
-}
-
-#suggestions button {
-  width: 100%;
-  max-width: 200px; /* Prevent button from stretching */
-  align-self: center; /* Center the button */
-}
-
-/* Header */
-#suggestions .header {
+.comment-section {
+  margin-top: 20px;
   text-align: left;
+}
+
+.comment {
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.guestbook-container {
+  background-color: #f8f7f2;
+  border: 2px solid #562123;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+.guestbook-container .header {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-#suggestions h2 {
-  font-size: 26px;
+.guestbook-container .header .title-container {
+  font-size: 24px;
   font-weight: bold;
-  color: #2d3b2d;
+  color: #562123;
 }
 
-/* Form Fields */
-#suggestions form p {
-  font-weight: bold;
-  color: #2d3b2d;
-  font-size: 18px;
+.guestbook-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-
-#suggestions input::placeholder,
-#suggestions textarea::placeholder {
-  color: #666;
-}
-
-#suggestions input:focus,
-#suggestions textarea:focus {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-/* Submit Button */
-#suggestions button {
+.guestbook-container input, .guestbook-container textarea {
+  padding: 10px;
+  border: 1px solid #562123;
+  border-radius: 5px;
+  font-size: 16px;
   width: 100%;
-  background: #fdf7e3;
-  color: #2d3b2d;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 12px;
+  box-sizing: border-box;
+}
+
+.guestbook-container button {
+  background-color: #562123;
+  color: #f8f7f2;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  font-size: 16px;
 }
 
-#suggestions button:hover {
-  background: #ebe1c8;
+.guestbook-container button:hover {
+  background-color: #6c3a32;
 }
 
-/* Comment Section */
-.comment-section {
-  margin-top: 20px;
-  width: 1200px;
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 50px; 
 }
 
-.suggest {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 15px;
-  border-left: 5px solid #2d3b2d;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.guestbook-container form p {
+  text-align: left; 
+  font-weight: bold;
+  color: #562123;
+  margin-bottom: 20px;
 }
 
-.suggest p {
-  margin: 5px 0;
-  color: #2d3b2d;
+.guestbook-container input,
+.guestbook-container textarea {
+  display: block;  
+  text-align: left; 
 }
+
+.guestbook-container input {
+  margin-bottom: 15px; 
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
