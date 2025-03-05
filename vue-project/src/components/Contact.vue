@@ -97,27 +97,57 @@ import facebook from '@/assets/images/facebook.jpg';
 import instagram from '@/assets/images/instagram.jpg';
 import linkedin from '@/assets/images/linkedin.jpg';
 import spotify from '@/assets/images/spotify.jpg';
-import { ref } from 'vue';
 
-// Reactive state for suggestions
+import { ref, onMounted } from 'vue';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://xcdboqdwkycagrzzrfrk.supabase.co';
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const guestName = ref('');
 const guestSuggest = ref('');
 const Suggestions = ref([]);
 
-// Function to add a new suggestion
-const addSuggest = () => {
-  if (guestName.value && guestSuggest.value) {
-    Suggestions.value.push({
-      id: Date.now(), // Unique ID
-      name: guestName.value,
-      message: guestSuggest.value,
-    });
-
-    // Clear input fields
-    guestName.value = '';
-    guestSuggest.value = '';
+const fetchSuggestions = async () => {
+  try {
+    const { data, error } = await supabase.from('suggestions').select('*');
+    if (error) throw error;
+    Suggestions.value = data;
+  } catch (error) {
+    console.error('Error fetching suggestions:', error.message);
   }
 };
+
+const addSuggest = async () => {
+  if (!guestName.value || !guestSuggest.value) {
+    alert('Please fill out both fields.');
+    return;
+  }
+  
+  try {
+    const { data, error } = await supabase.from('suggestions').insert([
+      { name: guestName.value, message: guestSuggest.value }
+    ]);
+    if (error) throw error;
+    
+    // Append new suggestion to list
+    Suggestions.value.push({ id: data[0].id, name: guestName.value, message: guestSuggest.value });
+    
+    // Reset form
+    guestName.value = '';
+    guestSuggest.value = '';
+  } catch (error) {
+    console.error('Error adding suggestion:', error.message);
+  }
+};
+
+onMounted(() => {
+  fetchSuggestions();
+});
+
+export { guestName, guestSuggest, Suggestions, addSuggest };
+
 </script>
 
 
