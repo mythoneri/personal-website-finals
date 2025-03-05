@@ -17,12 +17,5 @@ import HelloWorld from './components/Home.vue'
 </template>
 
 <style scoped>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, #183425, #869b8f);
-  color: #EDE6D4;
-  margin: 0;
-  padding: 0;
-}
 
 </style>

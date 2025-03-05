@@ -1,14 +1,13 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 import './assets/main.css';
 
-import App from './App.vue'
-import Home from './components/Home.vue'
+import App from './App.vue';
+import Home from './components/Home.vue';
+import router from './router'; // Import the router
 
+const app = createApp(App);
 
-const app = createApp(App)
+app.component('home', Home);
+app.use(router); // Use Vue Router
 
-app.component('home', Home)
-
-
-app.mount('#app')
-                  
+app.mount('#app');
