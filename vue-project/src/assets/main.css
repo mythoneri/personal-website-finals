@@ -11,6 +11,14 @@
   flex-direction: column;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 24
+  
+}
 
 /* Header */
 .sticky-header {
@@ -142,6 +150,7 @@ footer {
   margin: 0 auto;
   padding: 20px;
   gap: 20px;
+  
 }
 
 /* Hobbies and Interests Section */
@@ -151,12 +160,14 @@ footer {
   padding: 20px;
   background: #EDE6D4;
   border-radius: 10px;
+  text-align: left;
   color: #183425; /* Added text color */
 }
 
 .hobbies-grid {
   display: grid;
   gap: 12px;
+  
 }
 
 .hobby-card {
