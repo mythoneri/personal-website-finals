@@ -139,71 +139,216 @@ footer {
 }
 
 /*About Style*/
+/* General Styles */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+}
 
+/* Hobbies and Interests Section */
+.hobbies-container {
+  flex: 1;
+  min-width: 45%;
+  padding: 20px;
+  background: #EDE6D4;
+  border-radius: 10px;
+  color: #183425; /* Added text color */
+}
 
+.hobbies-grid {
+  display: grid;
+  gap: 12px;
+}
 
-/* Timeline */
+.hobby-card {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  gap: 10px;
+  padding: 15px;
+  background: linear-gradient(to bottom, #EDE6D4, #869b8f);
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #183425; /* Added text color */
+}
+
+.hobby-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Timeline Section */
 .timeline-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 10%;    
-    margin: 0 50px 50px auto;
+  flex: 1;
+  min-width: 45%;
+  padding: 20px;
+  background: #EDE6D4;
+  border-radius: 10px;
+  color: #183425; /* Added text color */
 }
 
-.timeline-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
+.timeline-box {
+  background: linear-gradient(to bottom, #EDE6D4, #869b8f);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color: #183425; /* Added text color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
-/* Common styling for both columns */
-.timeline-col {
-    background: #EDE6D4;
-    color: #183425;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-.content-box {
-    padding: 1rem;
-    border-left: 4px solid #183425;
-    margin-top: 1rem;
-}
-
-.content-box:before {
-    position: absolute;
-    content: '';
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    left: -50px;
-    top: 90px;
+.timeline-box:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .date {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-left: 4px solid #22a961;
+  background: #eef5ff;
+  border-radius: 5px;
+  color: #183425; /* Added text color */
 }
 
-.date h3 {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+  .hobbies-container, .timeline-wrapper {
+      min-width: 100%;
+  }
 }
 
-.date p {
-    color: black;
-    font-weight: 300;
-    font-size: 14px;
+/*Skills Styles*/
+.containerr {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two columns: 1/3 for tech-stacks, 2/3 for timeline */
+  gap: 20px;
+  padding: 10px;
+  margin: auto;
 }
 
-/* Gallery Styles */
+/* Tech Stacks Information */
+.tech-stacks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: linear-gradient(to bottom, #EDE6D4, #869b8f);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 1px;
+  color: #183425;
+}
+
+/* Skills Icon */
+.skills-icon {
+  width: 30px; /* Adjust the size as needed */
+  height: 30px; /* Ensure the height matches the width */
+  margin-right: 10px; /* Space between icon and text */
+  vertical-align: middle; /* Align icon with text */
+}
+
+.card p {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #010100;
+  margin: 5px 0;
+}
+
+/* Timeline */
+.timelinee-wrapper {
+  display: grid;
+  grid-template-rows: 4fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+}
+
+.timelinee-box {
+  background: linear-gradient(to bottom, #EDE6D4, #869b8f);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-left: auto; /* Align to the right */
+  width: 80%; /* Adjust width as needed */
+}
+
+.timelinee-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.timelinee-box a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.timelinee-box a:hover h3 {
+  text-decoration: underline;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  background: #22a961;
+  border-radius: 50%;
+  position: absolute;
+  top: 23px;
+  left: -10px;
+}
+
+
+.timelinee-box h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #183425;
+}
+
+.timelinee-box p {
+  font-size: 14px;
+  color: #010100;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 600px) {
+  .timelinee-wrapper {
+      grid-template-columns: 1fr; /* Switch to single column */
+  }
+
+  .timelinee-box {
+      width: 100%; /* Full width on smaller screens */
+      margin-left: 0; /* Center align on smaller screens */
+  }
+}
 
 
 
