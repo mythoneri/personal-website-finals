@@ -1,23 +1,19 @@
-<script setup>
-import Home from './components/Home.vue'
-import About from './components/About.vue'
-import Skills from './components/Skills.vue'
-
-
-
-</script>
-
 <template>
-  <header>
-      <Home/>
-      <About/>
-      <Skills/>
-  </header>
+  <div id="app">
+    <nav>
+      <router-link to="/"></router-link>
+      <router-link to="/about"></router-link>
+      <router-link to="/skills"></router-link>
+      <router-link to="/contact"></router-link>
 
-  <main>
-    <TheWelcome />
-  </main>
+    </nav>
+
+    <router-view />
+  </div>
 </template>
+
+<script setup>
+</script>
 
 <style scoped>
 
