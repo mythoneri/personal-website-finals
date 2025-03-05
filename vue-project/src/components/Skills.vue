@@ -13,7 +13,7 @@
         <h2>IT Experience & Skills</h2> <hr>
 
    
-    <div class="container">
+    <div class="containerr">
         <div class="timelinee-wrapper">
             <div class="timelinee-box">
                 <div class="circle"></div>
@@ -55,6 +55,63 @@
                 <p>For UI/UX Design and Programming class, I contributed the idea project to a 7-member group collaboration called 'RAMQUEST'.</p>
             </div>
         </div>
+
+        <div class="tech-stacks">
+        <div class="card">
+            <h2>Frontend Development</h2>
+            <p><img :src="html" alt="HTML" class="skills-icon">HTML</p>
+            <p><img :src="css" alt="CSS" class="skills-icon">CSS</p>
+            <p><img :src="js" alt="JavaScript" class="skills-icon">JavaScript</p>
+            <p><img :src="vue" alt="Vue.js" class="skills-icon">Vue.js</p>
+        </div>
+
+        <div class="card">
+            <h2>Backend Development</h2>
+            <p><img :src="supabase" alt="Supabase" class="skills-icon">Supabase</p>
+            <p><img :src="java" alt="Java" class="skills-icon">Java</p>
+            <p><img :src="python" alt="Python" class="skills-icon">Python</p>
+        </div>
+
+        <div class="card">
+            <h2>Design & Prototyping</h2>
+            <p><img :src="figma" alt="Figma" class="skills-icon">Figma</p>
+        </div>
+
+        <div class="card">
+            <h2>DevOps & Deployment</h2>
+            <p><img :src="vercel" alt="Vercel" class="skills-icon">Vercel</p>
+        </div>
+
+        <div class="card">
+            <h2>Artificial Intelligence Tools</h2>
+            <p><img :src="chatgpt" alt="ChatGPT" class="skills-icon">ChatGPT</p>
+            <p><img :src="gemini" alt="Gemini" class="skills-icon">Gemini</p>
+            <p><img :src="copilot" alt="Microsoft Copilot" class="skills-icon">Microsoft Copilot</p>
+        </div>
+
+        <div class="card">
+            <h2>Version Control & Collaboration</h2>
+            <p><img :src="github" alt="GitHub" class="skills-icon">GitHub</p>
+        </div>
+
+        <div class="card">
+            <h2>Database Management</h2>
+            <p><img :src="mariadb" alt="MariaDB" class="skills-icon">MariaDB</p>
+        </div>
+
+        <div class="card">
+            <h2>Resources</h2>
+            <a href="https://fonts.google.com/icons?selected=Material+Symbols+Outlined" target="_blank">
+                Link for Icons
+            </a> <br>
+            <a href="https://www.youtube.com/shorts/0lixmdXwE9Q" target="_blank">
+                Link for Icon in Website
+            </a> <br>
+            <a href="https://www.w3schools.com/css/css_grid_container.asp" target="_blank">
+                Link for Grid Containers
+            </a>
+        </div>
+    </div>
   
     
     </div>
@@ -85,6 +142,24 @@ import facebook from '@/assets/images/facebook.jpg';
 import instagram from '@/assets/images/instagram.jpg';
 import linkedin from '@/assets/images/linkedin.jpg';
 import spotify from '@/assets/images/spotify.jpg';
+import html from '@/assets/icons/html.png';
+import css from '@/assets/icons/css.png';
+import js from '@/assets/icons/js.png';
+import vue from '@/assets/icons/vue.png';
+import supabase from '@/assets/icons/supabase.png';
+import java from '@/assets/icons/java.png';
+import python from '@/assets/icons/python.png';
+import figma from '@/assets/icons/figma.png';
+import vercel from '@/assets/icons/vercel.png';
+import chatgpt from '@/assets/icons/chatgpt.png';
+import gemini from '@/assets/icons/gemini.png';
+import copilot from '@/assets/icons/copilot.png';
+import github from '@/assets/icons/github.png';
+import mariadb from '@/assets/icons/mariadb.png';
+
+
+
+
 </script>
 
 <style scoped>
