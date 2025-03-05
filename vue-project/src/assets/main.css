@@ -1,12 +1,6 @@
 
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-body {
+#app,body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(to bottom, #183425, #869b8f);
   color: #EDE6D4;
@@ -15,8 +9,6 @@ body {
   display: flex;
   height: 100%;
   flex-direction: column;
-
-
 }
 
 
@@ -103,7 +95,9 @@ body {
 
 /* Section Styling */
 .about, .gallery, .contact, .skills {
+  padding: 50px;
   text-align: justify;
+  margin: 20px 50px 20px 100px;
   text-indent: 5px;
   
 }
