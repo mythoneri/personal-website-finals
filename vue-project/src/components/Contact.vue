@@ -43,17 +43,16 @@
     <div id="suggestions" class="container guestbook-container">
       <div class="header">
         <div class="title-container">
-          <h2>Suggestions</h2>
-        </div>
+          <h2>Suggestions</h2> <br>
       </div>
       <form @submit.prevent="addSuggest">
         <div>
           <p>
-            <strong>Name:</strong> <br />
+            <strong>Name:</strong> <br>
             <input type="text" v-model="guestName" placeholder="Enter your name" required />
           </p>
           <p>
-            <strong>Suggestions:</strong> <br />
+            <strong>Suggestions:</strong> <br>
             <textarea v-model="guestSuggest" placeholder="Write your suggestions here" rows="4" required></textarea>
           </p>
           <div class="clearfix">
@@ -67,6 +66,7 @@
           <p>{{ suggest.message }}</p>
         </div>
       </div>
+    </div>
     </div> <!-- Properly closed div -->
   </section> <!-- Properly closed section -->
 
@@ -180,115 +180,131 @@ const addSuggest = () => {
     color: #183425;
 }
 
+/* Suggestions Section */
 #suggestions {
-    margin: 20px auto;
-    padding: 20px;
-    background: linear-gradient(to bottom, #EDE6D4, #869b8f);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #183425;
+  background: linear-gradient(to bottom, #fdf7e3, #b8c4b1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 1200px; /* Set a fixed max-width */
+  width: 100%; /* Ensure it is responsive */
+  margin: 30px auto;
 }
 
-/* Header Styling */
-.header {
-    text-align: left;
-    margin-bottom: 50px;
+/* Fixing form elements */
+#suggestions form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 1180px;
 }
 
-.title-container h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #183425;
+#suggestions input,
+#suggestions textarea {
+  width: 100%; /* Make sure input fields do not exceed the form width */
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  color: #2d3b2d;
+  outline: none;
+  transition: background 0.3s ease-in-out;
 }
 
-/* Form Styling */
-form p {
-    margin: 30px;
-    font-size: 18px;
+/* Fix submit button width */
+#suggestions button {
+  width: 100%;
+  max-width: 200px; /* Prevent button from stretching */
+  align-self: center; /* Center the button */
 }
 
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #183425;
-    font-size: 16px;
-    outline: none;
+/* Header */
+#suggestions .header {
+  text-align: left;
+  margin-bottom: 20px;
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #183425;
-    font-family: Poppins;
-    font-size: medium;
+#suggestions h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #2d3b2d;
 }
 
-/* Button Styling */
-button {
-    width: 100%;
-    padding: 10px;
-    background: #EDE6D4;
-    color: #183425;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-/* Align submit button to the right */
-button.submit {
-    width: 100px; /* Adjust width as needed */
-    margin-top: 10px;
-}
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+/* Form Fields */
+#suggestions form p {
+  font-weight: bold;
+  color: #2d3b2d;
+  font-size: 18px;
 }
 
-button:hover {
-    background: #35493e;
-    color: #EDE6D4;
 
+#suggestions input::placeholder,
+#suggestions textarea::placeholder {
+  color: #666;
+}
+
+#suggestions input:focus,
+#suggestions textarea:focus {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Submit Button */
+#suggestions button {
+  width: 100%;
+  background: #fdf7e3;
+  color: #2d3b2d;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#suggestions button:hover {
+  background: #ebe1c8;
 }
 
 /* Comment Section */
 .comment-section {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+  margin-top: 20px;
+  width: 1200px;
 }
 
 .suggest {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  border-left: 5px solid #2d3b2d;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .suggest p {
-    margin: 5px 0;
-}
-
-.suggest strong {
-    color: #183425;
-    font-size: 18px;
+  margin: 5px 0;
+  color: #2d3b2d;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    #suggestions {
-        width: 90%;
-        padding: 15px;
-    }
-    
-    .title-container h2 {
-        font-size: 20px;
-    }
+  #suggestions {
+    padding: 20px;
+  }
+
+  #suggestions h2 {
+    font-size: 22px;
+  }
+
+  #suggestions input,
+  #suggestions textarea {
+    font-size: 14px;
+  }
+
+  #suggestions button {
+    font-size: 16px;
+  }
 }
 
 
