@@ -41,29 +41,22 @@
     </div>
 
     <div class="comment-section">
-    <h2>Leave a Comment</h2>
+    <h3>Leave a Comment</h3>
     <form @submit.prevent="submitComment">
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" v-model="name" required class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="comment">Comment:</label>
-        <textarea id="comment" v-model="comment" required class="form-control"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <div v-if="submissionStatus" class="mt-2">
-        {{ submissionStatus }}
-      </div>
+      <input v-model="name" type="text" placeholder="Your Name" required />
+      <textarea v-model="comment" placeholder="Your Comment" required></textarea>
+      <button type="submit">Submit</button>
     </form>
 
-    <h2>Comments</h2>
+    <h3>Comments</h3>
     <ul>
-      <li v-for="comment in comments" :key="comment.id">
-        <strong>{{ comment.name }}</strong>: {{ comment.message }}
+      <li v-for="c in comments" :key="c.id">
+        <strong>{{ c.name }}</strong>: {{ c.comment }}
       </li>
     </ul>
   </div>
+
+    
   </section> <!-- Properly closed section -->
 
   <footer>
@@ -95,55 +88,33 @@ import linkedin from '@/assets/images/linkedin.jpg';
 import spotify from '@/assets/images/spotify.jpg';
 
 import { ref, onMounted } from 'vue';
-import { supabase } from '../lib/supabaseClient'
+import { supabase } from '@/lib/supabaseClient';
 
-// Initialize Supabase
-
-const comments = ref([]);
 const name = ref('');
 const comment = ref('');
-const submissionStatus = ref(null);
-const tableName = 'comments';
+const comments = ref([]);
 
-// Fetch comments from Supabase
-const getComments = async () => {
-  try {
-    const { data, error } = await supabase.from(tableName).select().order('created_at', { ascending: false });
-    if (error) throw error;
-    comments.value = data || [];
-  } catch (err) {
-    console.error('Error fetching comments:', err);
-  }
+const fetchComments = async () => {
+  const { data, error } = await supabase.from('comments').select('*').order('created_at', { ascending: false });
+  if (!error) comments.value = data;
 };
 
-// Submit new comment
 const submitComment = async () => {
-  submissionStatus.value = 'Submitting...';
+  if (!name.value || !comment.value) return;
 
-  if (!name.value.trim() || !comment.value.trim()) {
-    submissionStatus.value = 'Please fill out both fields.';
-    return;
-  }
+  const { error } = await supabase.from('comments').insert([
+    { name: name.value, comment: comment.value }
+  ]);
 
-  try {
-    const { error } = await supabase.from(tableName).insert([{ name: name.value, message: comment.value }]);
-    if (error) {
-      console.error('Error inserting comment:', error);
-      submissionStatus.value = 'Error submitting comment. Please try again.';
-    } else {
-      submissionStatus.value = 'Comment submitted successfully!';
-      name.value = '';
-      comment.value = '';
-      getComments(); // Refresh comments list
-    }
-  } catch (err) {
-    console.error('An unexpected error occurred:', err);
-    submissionStatus.value = 'An unexpected error occurred. Please try again later.';
+  if (!error) {
+    name.value = '';
+    comment.value = '';
+    fetchComments();
   }
 };
 
-// Fetch comments on mount
-onMounted(getComments);
+onMounted(fetchComments);
+
 
 </script>
 
@@ -209,92 +180,128 @@ onMounted(getComments);
 
 /* Suggestions Section */
 .comment-section {
-  margin-top: 20px;
-  text-align: left;
-}
-
-.comment {
-  border-top: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.comment p {
-  margin: 5px 0;
-}
-
-.guestbook-container {
-  background-color: #f8f7f2;
-  border: 2px solid #562123;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 800px; 
-  margin: 0 auto;
-}
-
-.guestbook-container .header {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background: linear-gradient(to bottom, #dad7c7, #a7b09a);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin-bottom: 20px;
 }
 
-.guestbook-container .header .title-container {
+h3 {
   font-size: 24px;
   font-weight: bold;
-  color: #562123;
+  color: #2d3b2d;
+  margin-bottom: 15px;
 }
 
-.guestbook-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.guestbook-container input, .guestbook-container textarea {
-  padding: 10px;
-  border: 1px solid #562123;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.guestbook-container button {
-  background-color: #562123;
-  color: #f8f7f2;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.guestbook-container button:hover {
-  background-color: #6c3a32;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    margin-top: 50px; 
-}
-
-.guestbook-container form p {
-  text-align: left; 
+label {
+  font-size: 18px;
   font-weight: bold;
-  color: #562123;
-  margin-bottom: 20px;
+  color: #2d3b2d;
+  display: block;
+  text-align: left;
+  margin-top: 15px;
 }
 
-.guestbook-container input,
-.guestbook-container textarea {
-  display: block;  
-  text-align: left; 
+input, textarea {
+  width: 1170px;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #2d3b2d;
 }
 
-.guestbook-container input {
-  margin-bottom: 15px; 
+textarea {
+  resize: none;
+  min-height: 100px;
 }
 
+input:focus, textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+button {
+  width: 100%;
+  background: #fdf7e3;
+  color: #2d3b2d;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #ebe1c8;
+  transform: scale(1.02);
+}
+
+.comment-list {
+  margin-top: 20px;
+  padding: 15px;
+  background: linear-gradient(to bottom, #c1c7b8, #919a87);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  color: #2d3b2d; /* Ensure text is dark and readable */
+}
+
+li strong {
+  display: block;
+  font-size: 18px;
+  color: #183425; /* Darker text for names */
+}
+
+li p {
+  font-size: 16px;
+  color: #2d3b2d; /* Ensure contrast with the background */
+  margin-top: 5px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .comment-section {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input, textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

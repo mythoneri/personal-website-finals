@@ -14,20 +14,8 @@
 </template>
 
 <script setup>
- import { ref, onMounted } from 'vue'
-import { supabase } from './lib/supabaseClient'
 
-const comments = ref([])
-async function getComments() {
-  const { data, error } = await supabase.from('comments').select()
-  if (!error && data) {
-    comments.value = data
-  }
-}
-
-onMounted(() => {
-  getComments()
-})
+ 
 </script>
 
 <style scoped>
