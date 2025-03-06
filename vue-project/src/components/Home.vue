@@ -121,4 +121,12 @@ import spotify from '@/assets/images/spotify.jpg';
     opacity: 1;
     transform: translateY(0);
   }
-}</style>
+}
+  @media (max-width: 768px) {
+  .text-container h4 {
+    font-size: 18px;  /* Slightly smaller for better fit */
+    line-height: 1.4; /* Improves readability */
+    margin-bottom: 8px; /* Adds spacing below */
+  }
+}
+</style>
