@@ -15,29 +15,40 @@
     <p>Welcome to my Picture Gallery! <br> 
       Take a look at my photos and some moments I captured in my journey.</p>
 
-    <div class="galleryy">
-      <div 
-        v-for="(image, index) in images.slice(0, 6)" 
-        :key="index" 
-        class="square" 
-        @click="showImage(index)"
-      >
-        <img :src="image" :alt="'Image ' + (index + 1)">
-      </div>
-    </div>
+      <div class="galleryy">
+  <div 
+    v-for="(image, index) in images.slice(0, 6)" 
+    :key="'gallery-' + index" 
+    class="square" 
+    @click="showImage(index)"
+  >
+    <img :src="image" :alt="'Image ' + (index + 1)">
+  </div>
+</div>
 
-    <h2>Mobile Photography</h2>
-    <hr>
-    <div class="galleryy">
-      <div 
-        v-for="(image, index) in images.slice(6)" 
-        :key="index + 6" 
-        class="rectangle" 
-        @click="showImage(index + 6)"
-      >
-        <img :src="image" :alt="'Photography ' + (index + 1)">
-      </div>
-    </div>
+<h2>Mobile Photography</h2>
+<hr>
+<div class="galleryy">
+  <div 
+    v-for="(image, index) in images.slice(6, 12)" 
+    :key="'mobile-' + (index + 6)" 
+    class="rectangle" 
+    @click="showImage(index + 6)"
+  >
+    <img :src="image" :alt="'Photography ' + (index + 7)">
+  </div>
+</div> <br>
+<div class="galleryy">
+  <div 
+    v-for="(image, index) in images.slice(12, 18)" 
+    :key="'extra-' + (index + 12)" 
+    class="rectangle" 
+    @click="showImage(index + 12)"
+  >
+    <img :src="image" :alt="'Photography ' + (index + 13)">
+  </div>
+</div>
+
 
     <!-- Modal -->
     <div v-if="modalVisible" class="modal" @click.self="closeModal">
@@ -90,6 +101,14 @@ import photography3 from '@/assets/images/photography3.jpg';
 import photography4 from '@/assets/images/photography4.jpg';
 import photography5 from '@/assets/images/photography5.jpg';
 import photography6 from '@/assets/images/photography6.jpg';
+import photography7 from '@/assets/images/photography7.jpg';
+import photography8 from '@/assets/images/photography8.jpg';
+import photography9 from '@/assets/images/photography9.jpg';
+import photography10 from '@/assets/images/photography10.jpg';
+import photography11 from '@/assets/images/photography11.jpg';
+import photography12 from '@/assets/images/photography12.jpg';
+
+
 
 // Reactive state for modal
 const modalVisible = ref(false);
@@ -98,7 +117,8 @@ const currentIndex = ref(0);
 
 const images = ref([
   family, photography, mi231, strings, msc, gmrc,
-  photography1, photography2, photography3, photography4, photography5, photography6
+  photography1, photography2, photography3, photography4, photography5, photography6,
+  photography7, photography8, photography9, photography10, photography11, photography12
 ]);
 
 // Show the modal with selected image
