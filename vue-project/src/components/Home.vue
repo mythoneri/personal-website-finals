@@ -12,13 +12,13 @@
   <div class="text-image-container">
     <div class="text-container">
       <h1>Hi! I'm Nerimiah Jay Ato</h1> 
-      <h4>IT Student</h4> 
+      <h4>IT Student &nbsp; | &nbsp; UI Designer &nbsp; | &nbsp; Web Developer</h4>
       <p>
         A second-year student at Asia Pacific College pursuing a Bachelor of Science in Information Technology with a specialization in Mobile and Internet Technology. <br>
         I'm a 20-year-old exploring the world of web development! Thanks for stopping by to learn about me!
       </p>
-      <p>
-        <i>"Small disciplines repeated with consistency every day lead to great achievements gained slowly over time." - </i>
+      <p class="quote">
+        "Small disciplines repeated with consistency every day lead to great achievements gained slowly over time." -
         <b>John C. Maxwell</b>
       </p>
     </div>
@@ -55,5 +55,43 @@ import spotify from '@/assets/images/spotify.jpg';
 </script>
 
 <style scoped>
-/* Add any necessary styling */
+.quote {
+  font-style: italic;
+  font-size: 16px;
+  color: #444; /* Dark gray for readability */
+  text-align: center;
+  margin-top: 15px;
+  margin-left: 25px;
+  padding: 30px;
+  border-left: 5px solid #22a961; /* Green left border for emphasis */
+  border-radius: 10px;
+  background: #f9f9f9; /* Light gray background */
+  display: inline-block;
+  max-width: 80%;
+  opacity: 0; /* Start hidden */
+  transform: translateY(20px); /* Start slightly below */
+  animation: fadeInUp 1s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.quote:hover {
+  transform: translateY(-10px) scale(1.05); /* Move up & slightly enlarge */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+  background: #f1f1f1; /* Slightly darker background */
+  border-left-color: #1c8b4d; /* Darker green for emphasis */
+}
+
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 </style>

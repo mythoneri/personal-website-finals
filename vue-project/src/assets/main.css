@@ -55,6 +55,10 @@
   text-decoration-thickness: 3px;
 }
 
+.nav-link a:hover::after {
+  width: 100%;
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
   .nav-link {
@@ -85,6 +89,35 @@
 }
 
 /* Style for the text container */
+/* Typewriter Animation */
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Apply the animation */
+.text-container h4 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #EDE6D4; /* Cursor effect */
+  width: 0;
+  animation: typing 3s steps(20, end) infinite, blink 0.6s infinite;
+}
 .text-container {
   flex: 1; 
   max-width: 50%; 
@@ -96,11 +129,6 @@
 /* Style for the text */
 .text-container h1 {
   font-size: 60px;
-  margin-bottom: 5px;
-}
-
-.text-container h4 {
-  font-size: 28px;
   margin-bottom: 5px;
 }
 
@@ -399,6 +427,87 @@ footer {
 }
 
 
+/* Gradient Animation */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#app, body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #183425, #869b8f);
+  background-size: 200% 200%;
+  animation: gradientAnimation 8s infinite ease-in-out;
+  transition: background 0.5s ease-in-out;
+  color: #EDE6D4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+
+
+/* Fade-in Animation for Sections */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about, .gallery, .contact, .skills {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* Image Fade-in */
+.custom-image {
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  flex-shrink: 0;
+  border: 2px solid #EDE6D4;
+  object-fit: cover;
+  margin: 10px 50px 50px 100px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 0.8s;
+}
+
+/* Card Hover Animation */
+.hobby-card, .timeline-box, .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hobby-card:hover, .timeline-box:hover, .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Gallery Animation */
+.galleryy .square, .galleryy .rectangle {
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s ease-in-out;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 0.6s;
+}
+
+.galleryy .square:hover, .galleryy .rectangle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Hover Animation */
+.social-buttons-container img {
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.social-buttons-container img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
 
 
