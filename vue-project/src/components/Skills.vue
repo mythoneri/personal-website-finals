@@ -243,15 +243,7 @@ a:hover {
   text-decoration: underline;
 }
 
-.circle {
-  width: 20px;
-  height: 20px;
-  background: #22a961;
-  border-radius: 50%;
-  position: absolute;
-  top: 23px;
-  left: -10px;
-}
+
 
 /* Adjust text sizes */
 .timelinee-box h3 {
@@ -278,10 +270,6 @@ a:hover {
     padding: 15px;
   }
 
-  .circle {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 @media (max-width: 480px) {

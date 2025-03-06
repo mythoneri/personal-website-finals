@@ -47,6 +47,8 @@
       <textarea v-model="comment" placeholder="Your Comment" required></textarea>
       <button type="submit">Submit</button>
     </form>
+    </div>
+    <div class="comment-section">
 
     <h3>Comments</h3>
     <ul>
@@ -130,15 +132,17 @@ onMounted(fetchComments);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Grid Layout Adjustments */
 .contact-cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
     gap: 20px;
     margin-top: 20px;
 }
 
+/* Contact Card */
 .contact-card {
-    background: linear-gradient(to bottom, #869b8f, #ffffff);    
+    background: linear-gradient(to bottom, #869b8f, #ffffff);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -147,6 +151,7 @@ onMounted(fetchComments);
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
+    text-align: center;
 }
 
 .heading {
@@ -157,6 +162,7 @@ onMounted(fetchComments);
     justify-content: center;
     gap: 10px;
 }
+
 .contact-card:hover {
     transform: scale(1.05);
 }
@@ -165,162 +171,200 @@ onMounted(fetchComments);
     font-size: 3rem;
     color: #183425;
 }
-.contact-card h4  {
+
+.contact-card h4 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #183425;
-
 }
-.contact-card p, .contact-card a {
+
+.contact-card p,
+.contact-card a {
     font-size: 1rem;
     margin-top: 10px;
     font-weight: bold;
     color: #183425;
 }
 
-/* Suggestions Section */
+/* Comment Section */
 .comment-section {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 30px;
-  background: linear-gradient(to bottom, #dad7c7, #a7b09a);
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  text-align: center;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 30px;
+    background: linear-gradient(to bottom, #dad7c7, #a7b09a);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 h3 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2d3b2d;
-  margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d3b2d;
+    margin-bottom: 15px;
 }
 
 label {
-  font-size: 18px;
-  font-weight: bold;
-  color: #2d3b2d;
-  display: block;
-  text-align: left;
-  margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d3b2d;
+    display: block;
+    text-align: left;
+    margin-top: 15px;
 }
 
-input, textarea {
-  width: 1170px;
-  margin: 10px 0;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  color: #2d3b2d;
+input,
+textarea {
+    width: 1170px; /* Full width on all screens */
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #2d3b2d;
 }
 
 textarea {
-  resize: none;
-  min-height: 100px;
+    resize: none;
+    min-height: 100px;
 }
 
-input:focus, textarea:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.15);
+input:focus,
+textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 button {
-  width: 100%;
-  background: #fdf7e3;
-  color: #2d3b2d;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 15px;
+    width: 100%; /* Full-width button */
+    background: #fdf7e3;
+    color: #2d3b2d;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 15px;
 }
 
 button:hover {
-  background: #ebe1c8;
-  transform: scale(1.02);
+    background: #ebe1c8;
+    transform: scale(1.02);
 }
 
+/* Comments List */
 .comment-list {
-  margin-top: 20px;
-  padding: 15px;
-  background: linear-gradient(to bottom, #c1c7b8, #919a87);
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(to bottom, #c1c7b8, #919a87);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 li {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 10px;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  color: #2d3b2d; /* Ensure text is dark and readable */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    color: #2d3b2d;
 }
 
 li strong {
-  display: block;
-  font-size: 18px;
-  color: #183425; /* Darker text for names */
+    display: block;
+    font-size: 18px;
+    color: #183425;
 }
 
 li p {
-  font-size: 16px;
-  color: #2d3b2d; /* Ensure contrast with the background */
-  margin-top: 5px;
+    font-size: 16px;
+    color: #2d3b2d;
+    margin-top: 5px;
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .comment-section {
+        padding: 20px;
+    }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .comment-section {
-    padding: 20px;
-  }
+    h3 {
+        font-size: 22px;
+    }
 
-  h2 {
-    font-size: 22px;
-  }
+    input,
+    textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
 
-  input, textarea {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  button {
-    font-size: 16px;
-  }
+    button {
+        font-size: 16px;
+    }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  #suggestions {
-    padding: 20px;
-  }
+    /* Stack contact cards */
+    .contact-cards-grid {
+        grid-template-columns: 1fr;
+    }
 
-  #suggestions h2 {
-    font-size: 22px;
-  }
+    .contact-card {
+        padding: 15px;
+    }
 
-  #suggestions input,
-  #suggestions textarea {
-    font-size: 14px;
-  }
+    /* Adjust comment section padding */
+    .comment-section {
+        padding: 15px;
+    }
 
-  #suggestions button {
-    font-size: 16px;
-  }
+    /* Input, textarea, and button adjustments */
+    input,
+    textarea {
+        font-size: 14px;
+        padding: 10px;
+        width: 90%; /* Full width */
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    /* Adjust comment list items */
+    li {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    h3 {
+        font-size: 20px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    input,
+    textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }
 
 
